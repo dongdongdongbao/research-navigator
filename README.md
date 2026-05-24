@@ -2,8 +2,7 @@
 
 > 一个为研究生与科研新人整理的科研工具导航站。原创整理 · 零账号 · 零追踪。
 
-<!-- 部署到 Vercel 后把下面这行解开注释并填上线上地址 -->
-<!-- **Live demo:** https://research-navigator.vercel.app -->
+**Live demo:** https://research-navigator-92jm.vercel.app
 
 <!-- 截图占位：建议放 hero 暗色截图 + 卡片网格截图各一张 -->
 <!-- ![Hero screenshot](./docs/screenshot-hero.png) -->
