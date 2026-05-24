@@ -1,0 +1,313 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ───────────────────────── LIGHT (paper-white research notebook) ──── */
+:root {
+  --background: #fafafc;
+  --foreground: #0a0612;
+  --muted: #5d566e;
+
+  --surface-1: #ffffff;
+  --surface-2: #f3f1f8;
+  --surface-3: #ebe7f3;
+
+  --border: #e4e0ef;
+  --border-strong: #cfc8e0;
+
+  --violet: #7c3aed;
+  --violet-soft: #c4b5fd;
+  --blue: #2563eb;
+  --cyan: #0891b2;
+
+  --accent: var(--violet);
+  --accent-fg: #ffffff;
+  --accent-soft: #ede9fe;
+  --ring: var(--violet);
+
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-bg-strong: rgba(255, 255, 255, 0.82);
+  --glass-border: rgba(20, 15, 40, 0.08);
+  --glass-highlight: rgba(20, 15, 40, 0.05);
+
+  --grid-dot: rgba(20, 15, 40, 0.06);
+  --glow-violet: 0 0 24px rgba(124, 58, 237, 0.18);
+  --glow-cyan: 0 0 24px rgba(8, 145, 178, 0.14);
+
+  --orb-a: radial-gradient(circle, rgba(124, 58, 237, 0.22) 0%, transparent 60%);
+  --orb-b: radial-gradient(circle, rgba(37, 99, 235, 0.22) 0%, transparent 60%);
+}
+
+/* ───────────────────────── DARK (research lab) ────────────────────── */
+[data-theme="dark"] {
+  --background: #07050c;
+  --foreground: #e8e6f0;
+  --muted: #8b879a;
+
+  --surface-1: #0f0a1a;
+  --surface-2: #15102a;
+  --surface-3: #1c1738;
+
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+
+  --violet: #8b5cf6;
+  --violet-soft: #c4b5fd;
+  --blue: #3b82f6;
+  --cyan: #22d3ee;
+
+  --accent: var(--violet);
+  --accent-fg: #ffffff;
+  --accent-soft: rgba(139, 92, 246, 0.18);
+  --ring: var(--violet);
+
+  --glass-bg: rgba(20, 15, 40, 0.5);
+  --glass-bg-strong: rgba(20, 15, 40, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.12);
+
+  --grid-dot: rgba(180, 165, 255, 0.06);
+  --glow-violet: 0 0 32px rgba(139, 92, 246, 0.35);
+  --glow-cyan: 0 0 24px rgba(34, 211, 238, 0.32);
+
+  --orb-a: radial-gradient(circle, rgba(139, 92, 246, 0.5) 0%, transparent 60%);
+  --orb-b: radial-gradient(circle, rgba(34, 211, 238, 0.32) 0%, transparent 60%);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  --color-violet: var(--violet);
+  --color-violet-soft: var(--violet-soft);
+  --color-blue: var(--blue);
+  --color-cyan: var(--cyan);
+
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+  --color-ring: var(--ring);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+html {
+  color-scheme: light;
+}
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Default border color = our token */
+*,
+*::before,
+*::after {
+  border-color: var(--border);
+}
+
+/* ───────────────────────── Utility classes ────────────────────────── */
+
+.font-display {
+  font-family: var(--font-display), ui-serif, Georgia, serif;
+  letter-spacing: -0.015em;
+}
+
+.font-body {
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+}
+
+.font-mono {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+.bg-dot-grid {
+  background-image: radial-gradient(var(--grid-dot) 1px, transparent 1px);
+  background-size: 22px 22px;
+  background-position: -1px -1px;
+}
+
+/* Glass surface — used by Glass component and ad-hoc panels */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  position: relative;
+}
+.glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    180deg,
+    var(--glass-highlight),
+    transparent 35%,
+    transparent 65%,
+    var(--glass-highlight) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#000, #000) content-box,
+    linear-gradient(#000, #000);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.glass-strong {
+  background: var(--glass-bg-strong);
+}
+
+/* Aurora gradient text (used sparingly: hero accent word, drawer CTA) */
+.text-aurora {
+  background: linear-gradient(90deg, var(--violet), var(--blue), var(--cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-aurora {
+  background: linear-gradient(135deg, var(--violet) 0%, var(--blue) 60%, var(--cyan) 120%);
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: 0.75rem;
+  top: -2.5rem;
+  z-index: 100;
+  padding: 0.5rem 0.875rem;
+  border-radius: 0.5rem;
+  background: var(--violet);
+  color: #fff;
+  font-size: 0.875rem;
+  transition: top 0.15s ease;
+}
+.skip-link:focus {
+  top: 0.75rem;
+}
+
+/* ───────────────────────── Motion: orbs + node network ────────────── */
+
+@keyframes orb-drift-a {
+  0%,
+  100% {
+    transform: translate3d(-6%, -4%, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(8%, 6%, 0) scale(1.1);
+  }
+}
+
+@keyframes orb-drift-b {
+  0%,
+  100% {
+    transform: translate3d(10%, 8%, 0) scale(1.05);
+  }
+  50% {
+    transform: translate3d(-8%, -6%, 0) scale(0.95);
+  }
+}
+
+.orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  pointer-events: none;
+  will-change: transform;
+}
+.orb-a {
+  background: var(--orb-a);
+  animation: orb-drift-a 22s ease-in-out infinite;
+}
+.orb-b {
+  background: var(--orb-b);
+  animation: orb-drift-b 26s ease-in-out infinite;
+}
+
+@keyframes node-float {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(var(--dx, 4px), var(--dy, -6px));
+  }
+}
+
+.node {
+  animation: node-float 10s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Featured glow pulse */
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+.glow-pulse {
+  animation: glow-pulse 4s ease-in-out infinite;
+}
+
+/* Entrance: used by IntersectionObserver-driven [data-in-view] */
+[data-in-view="false"] {
+  opacity: 0;
+  transform: translateY(8px);
+}
+[data-in-view="true"] {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 380ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ───────────────────────── View Transitions API ───────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 240ms;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+/* ───────────────────────── Reduced motion ─────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .orb,
+  .node {
+    animation: none !important;
+  }
+}
